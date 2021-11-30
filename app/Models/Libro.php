@@ -27,7 +27,7 @@ class Libro extends Model
 		'iduser' => 'required',
 		'idcategoria' => 'required',
 		'idautor' => 'required',
-		'titulolibro' => 'required',
+
     ];
 
     protected $perPage = 20;

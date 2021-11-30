@@ -33,7 +33,10 @@
 
         <div class="form-group">
             <label for="titulolibro">Adjuntar Libro</label>
-            <input class="form-control" type="file" name="titulolibro" value="{{ old('titulolibro',$libro->titulolibro) }}" class="form-control-file">
+            <input class="form-control" type="file" accept="image/*, application/pdf" name="titulolibro" id="titulolibro" class="form-control-file" onchange="return cambiarFile();">
+            @error('titulolibro')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -52,3 +55,17 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>
+
+@section('js')
+<script type="text/javascript">
+function cambiarFile(){
+
+    const input = document.getElementById('titulolibro');
+    if (input.file  && input.files[0]){
+        console.log("File Seleccionado : ", input.files[0]);
+    }else{
+    console.log("Sin Archivo Seleccionado " + document.getElementById('titulolibro').files[0]);
+    }
+}
+</script>
+@endsection

@@ -8,6 +8,7 @@ use App\Models\Categoria;
 use App\Models\Autore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 /**
  * Class LibroController
@@ -112,11 +113,40 @@ class LibroController extends Controller
      * @param  Libro $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Libro $libro)
+    public function update(Request $request, $libro)
     {
         request()->validate(Libro::$rules);
 
-        $libro->update($request->all());
+        //$lib = Libro::find($libro);
+        //return $lib;
+        
+        try {
+            DB::beginTransaction();
+            $lib = Libro::find($libro);
+            $lib->iduser=$request->get('iduser');
+            $lib->idcategoria=$request->get('idcategoria');
+            $lib->idautor=$request->get('idautor');
+            if($request->hasFile('titulolibro')){
+
+                $destination = public_path().'/datalibros/'.$lib->titulolibro;
+                if(File::exists($destination)){
+                   File::delete($destination);
+                }
+
+                $archivo=$request->file('titulolibro');
+                $archivo->move(public_path().'/datalibros/',$archivo->getClientOriginalName());
+                $lib->titulolibro=$archivo->getClientOriginalName();
+            }
+            $lib->idiomalibro=$request->get('idiomalibro');
+            $lib->descripcionlibro=$request->get('descripcionlibro');
+
+            $lib->update();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+        }
+
+        //$libro->update($request->all());
 
         return redirect()->route('libros.index')
             ->with('success', 'Libro updated successfully');
@@ -129,6 +159,14 @@ class LibroController extends Controller
      */
     public function destroy($idlibro)
     {
+        $lib = Libro::find($idlibro);
+
+        $destination = public_path().'/datalibros/'.$lib->titulolibro;
+
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+
         $libro = Libro::find($idlibro)->delete();
 
         return redirect()->route('libros.index')
