@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\File;
  */
 class LibroController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }   
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +29,18 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros = Libro::paginate();
+        //$libros = Libro::paginate();
+
+        $libros=DB::table('libros')
+        ->join('users','users.id', '=' ,'libros.iduser')
+        ->join('categorias','categorias.idcategoria', '=' ,'libros.idcategoria')
+        ->join('autores','autores.idautor', '=' ,'libros.idautor')
+        ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
+         'autores.nombreautor as autor', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
+         'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
+         //->where('operaciones.created_at','LIKE','%'.$texto.'%')
+        ->orderBy('libros.titulolibro')
+        ->paginate(15);
 
         return view('libro.index', compact('libros'))
             ->with('i', (request()->input('page', 1) - 1) * $libros->perPage());
@@ -52,7 +69,7 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         request()->validate(Libro::$rules);
-
+        $archivo;
         try {
             DB::beginTransaction();
             $lib=new Libro;
@@ -63,6 +80,7 @@ class LibroController extends Controller
                 $archivo=$request->file('titulolibro');
                 $archivo->move(public_path().'/datalibros/',$archivo->getClientOriginalName());
                 $lib->titulolibro=$archivo->getClientOriginalName();
+                //return $lib;
             }
             $lib->idiomalibro=$request->get('idiomalibro');
             $lib->descripcionlibro=$request->get('descripcionlibro');
@@ -73,7 +91,7 @@ class LibroController extends Controller
         }
         //$libro = Libro::create($request->all());
         //datalibros
-
+  
         return redirect()->route('libros.index')
             ->with('success', 'Libro created successfully.');
     }

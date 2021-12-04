@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\AutoreController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\BusquedaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +19,16 @@ use App\Http\Controllers\LibroController;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+//Route::resource('/', LibroController::class)->parameters(['/' => 'libro'])->names('libros');
+Route::resource('/', BusquedaController::class)->parameters(['/' => 'busqueda'])->names('busquedas');
+
+
+//Route::get('/', [App\Http\Controllers\LibroController::class, 'index'])->name('libros');
 
 Auth::routes();
 
@@ -30,3 +39,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('cat', CategoriaController::class)->parameters(['cat' => 'categoria'])->names('categorias');
 Route::resource('aut', AutoreController::class)->parameters(['aut' => 'autore'])->names('autores');
 Route::resource('lib', LibroController::class)->parameters(['lib' => 'libro'])->names('libros');
+Route::resource('coment', ComentarioController::class)->parameters(['coment' => 'comentario'])->names('comentarios');
+Route::resource('buscar', BusquedaController::class)->parameters(['buscar' => 'busqueda'])->names('busquedas');

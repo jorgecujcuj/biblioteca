@@ -54,7 +54,7 @@
 
                                     <div class="form-group">
                                         <label for="titulolibro">Adjuntar Libro</label>
-                                        <input class="form-control" type="file" accept="application/pdf" name="titulolibro" class="form-control-file">
+                                        <input id="titulolibro" type="file" accept="application/pdf" name="titulolibro" class="form-control-file">
                                         @error('titulolibro')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

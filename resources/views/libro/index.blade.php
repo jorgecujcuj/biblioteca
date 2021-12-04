@@ -37,12 +37,14 @@
                                         <th>No</th>
                                         
 										<th>Idlibro</th>
-										<th>Iduser</th>
-										<th>Idcategoria</th>
-										<th>Idautor</th>
-										<th>Titulolibro</th>
-										<th>Idiomalibro</th>
+										<th>Usuario</th>
+										<th>Categoria</th>
+										<th>Autor</th>
+										<th>Libro</th>
+                                        <th>link</th>
+										<th>Idioma</th>
 										<th>Descripcionlibro</th>
+                                        <th>Fecha</th>
 
                                         <th></th>
                                     </tr>
@@ -53,12 +55,14 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $libro->idlibro }}</td>
-											<td>{{ $libro->iduser }}</td>
-											<td>{{ $libro->idcategoria }}</td>
-											<td>{{ $libro->idautor }}</td>
+											<td>{{ $libro->usuario }}</td>
+											<td>{{ $libro->categoria }}</td>
+											<td>{{ $libro->autor }}</td>
+                                            <td>{{ $libro->titulolibro }}</td>
 											<td><a href="datalibros/{{ $libro->titulolibro }}" target="blank_" >Ver Documento</a></td>
-											<td>{{ $libro->idiomalibro }}</td>
+											<td>{{ $libro->idioma }}</td>
 											<td>{{ $libro->descripcionlibro }}</td>
+                                            <td>{{ $libro->fecha }}</td>
 
                                             <td>
                                                 <form action="{{ route('libros.destroy',$libro->idlibro) }}" method="POST">
