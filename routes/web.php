@@ -24,11 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });*/
 
-//Route::resource('/', LibroController::class)->parameters(['/' => 'libro'])->names('libros');
 Route::resource('/', BusquedaController::class)->parameters(['/' => 'busqueda'])->names('busquedas');
-
-
-//Route::get('/', [App\Http\Controllers\LibroController::class, 'index'])->name('libros');
 
 Auth::routes();
 
