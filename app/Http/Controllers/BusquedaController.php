@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //AGREGUE
 use App\Models\Libro;
+use App\Models\Comentario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -17,7 +18,7 @@ class BusquedaController extends Controller
      */
     public function index(Request $request)
     {
-        $texto = trim($request->get('texto'));
+        $name = trim($request->get('name'));
 
         $libros=DB::table('libros')
         ->join('users','users.id', '=' ,'libros.iduser')
@@ -26,11 +27,11 @@ class BusquedaController extends Controller
         ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
          'autores.nombreautor as autor', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
-         ->where('libros.titulolibro','LIKE','%'.$texto.'%')
+         ->where('libros.titulolibro','LIKE','%'.$name.'%')
         ->orderBy('libros.titulolibro')
         ->paginate(8);
 
-        return view('busqueda.index', compact('libros','texto'));
+        return view('busqueda.index', compact('libros','name'));
     }
 
     /**
@@ -54,6 +55,36 @@ class BusquedaController extends Controller
 
         return view('busqueda.show', compact('libro'));
         //return $libro;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $comentario = new Comentario();
+
+        return view('busqueda.create', compact('comentario'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        request()->validate(Comentario::$rules);
+
+        $comentario = Comentario::create($request->all());
+
+        $mensaje = "Comentario enviado con éxito";
+
+        return redirect()->route('busquedas.index')
+        ->with('success', $mensaje);
     }
 
 }

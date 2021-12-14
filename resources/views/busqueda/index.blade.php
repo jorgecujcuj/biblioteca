@@ -4,30 +4,36 @@
     Buscar
 @endsection
 
+@section('portada')
+        <div class="masthead-heading">Biblioteca Virtual</div>
+        <div class="masthead-subheading">Santiago Atitlán, Sololá</div>
+@endsection
+
 @section('content')
-    <div class="text-center">
-        <h2 class="section-heading text-uppercase">Ingresar el nombre del libro que deseas buscar:</h2>
-        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-    </div>
+
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Ingresar el nombre del libro que deseas buscar:</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
 
     
-    <div class="col-xl-6">    
-    <form action="{{ route('busquedas.index') }}" method="get">    
-        <div class="row">
+    <div class="col-xl-6 mx-auto">    
+        <form action="{{ route('busquedas.index') }}" method="get">    
+            <div class="row">
 
-            <div class="col">
-                <input class="form-control form-control-lg" type="search" placeholder="Ingrese una palabra" aria-label="Search" id="texto" name="texto" value="{{ $texto }}" autofocus>
-            </div>
+                <div class="col">
+                    <input class="form-control form-control-lg" type="search" placeholder="Nombre del libro" aria-label="Search" id="name" name="name" value="{{ $name }}" autofocus>
+                </div>
 
+                
+                <div class="col-auto">
+                    <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+                </div>
             
-            <div class="col-auto">
-                <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
             </div>
-        
-        </div>
-    </form>
+        </form>
     </div>
-    <br>
+    <br></br>
     <div class="row">                           
                    
         @if ($message = Session::get('success'))
@@ -70,13 +76,52 @@
     <div class="pagination justify-content-end">
         {!! $libros->links() !!}
     </div>
+ 
+@endsection
 
+@section('comentario')
+<div class="text-white text-center">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <h2 class="mb-4">Deja un comentario:</h2>       
 
+                    <div class="row">
+
+                        <div class="col">
+                            
+                                <div class="row justify-content-center">
+
+                                            @includeif('partials.errors')
+
+                                            <div class="card-body">
+                                                @if ($message = Session::get('success'))
+                                                    <div class="alert alert-success" style="color: #FFFFFF; background-color: rgba(28, 215, 255, .2); border:none;">
+                                                       <h3> <p>{{ $message }}</p></h3>
+                                                    </div>
+                                                @endif
+
+                                                <form method="POST" action="{{ route('busquedas.store') }}"  role="form" enctype="multipart/form-data">
+                                                    @csrf
+
+                                                    @include('busqueda.form')
+                                                </form>
+
+                                            </div>
+                                            
+                                
+                                </div>
+                            
+                        </div>
+                    </div>
+        </div>
+   
+</div>
 @endsection
 
 @section('css')
 <style>
-
-
+    header.masthead{
+        background-image: url('/web/img/portade.png');
+    }
 </style>
 @endsection

@@ -21,9 +21,9 @@ class Comentario extends Model
 {
     
     static $rules = [
-		'comentario' => 'required',
-		'nombreautor' => 'required',
-		'email' => 'required',
+    'comentario' => ['required', 'string', 'min:10', 'max:255'],
+    'nombreautor' => ['required', 'string', 'min:4','max:45'],
+    'email' => ['required', 'string', 'email:rfc,dns', 'max:100'],
     ];
 
     protected $perPage = 20;

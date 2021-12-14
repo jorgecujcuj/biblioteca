@@ -32,8 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Route::resource('sasdadsasd', CategoriaController::class)->parameters(['categorias' => 'categoria'])->names('categorias');
 //Route::resource('categorias', CategoriaController::class);
-Route::resource('cat', CategoriaController::class)->parameters(['cat' => 'categoria'])->names('categorias');
-Route::resource('aut', AutoreController::class)->parameters(['aut' => 'autore'])->names('autores');
-Route::resource('lib', LibroController::class)->parameters(['lib' => 'libro'])->names('libros');
-Route::resource('coment', ComentarioController::class)->parameters(['coment' => 'comentario'])->names('comentarios');
-Route::resource('buscar', BusquedaController::class)->parameters(['buscar' => 'busqueda'])->names('busquedas');
+Route::resource('Categorias', CategoriaController::class)->parameters(['Categorias' => 'categoria'])->names('categorias');
+Route::resource('Autores', AutoreController::class)->parameters(['Autores' => 'autore'])->names('autores');
+Route::resource('DBLibros', LibroController::class)->parameters(['DBLibros' => 'libro'])->names('libros');
+Route::resource('Comentarios', ComentarioController::class)->parameters(['Comentarios' => 'comentario'])->names('comentarios');
+Route::resource('Libros', BusquedaController::class)->parameters(['Libros' => 'busqueda'])->names('busquedas');

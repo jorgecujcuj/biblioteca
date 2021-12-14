@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -37,9 +36,7 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -61,7 +58,6 @@
                 </div>
             </div>
         </div>
-    </section>
 @endsection
 
 @section('css')
@@ -83,6 +79,10 @@
   width: 100%;
   height: 100%;
 }
-
+</style>
+<style>
+    header.masthead{
+        background-image: url('/web/img/portade.png');
+    }
 </style>
 @endsection
