@@ -2,7 +2,7 @@
         <label for="comentario" class="col-md-4 col-form-label text-md-right">{{ __('Comentario:') }}</label>
 
         <div class="col-md-6">
-            <textarea id="comentario" class="form-control @error('comentario') is-invalid @enderror" name="comentario" required autocomplete="comentario" autofocus>{{ old('comentario') }} </textarea>
+            <textarea id="comentario" class="form-control @error('comentario') is-invalid @enderror" name="comentario" required autocomplete="comentario">{{ old('comentario') }} </textarea>
 
             @error('comentario')
                 <span class="invalid-feedback" role="alert" style="color: #FFFFFF; background-color: #046ce5; border:none;">
@@ -16,7 +16,7 @@
         <label for="nombreautor" class="col-md-4 col-form-label text-md-right">{{ __('Nombre:') }}</label>
 
         <div class="col-md-6">
-            <input id="nombreautor" type="text" class="form-control @error('nombreautor') is-invalid @enderror" name="nombreautor" value="{{ old('nombreautor') }}" required autocomplete="nombreautor" autofocus>
+            <input id="nombreautor" type="text" class="form-control @error('nombreautor') is-invalid @enderror" name="nombreautor" value="{{ old('nombreautor') }}" required autocomplete="nombreautor">
 
             @error('nombreautor')
                 <span class="invalid-feedback" role="alert" style="color: #FFFFFF; background-color: #046ce5; border:none;">

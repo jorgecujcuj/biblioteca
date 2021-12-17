@@ -120,8 +120,15 @@
 
 @section('css')
 <style>
-    header.masthead{
-        background-image: url('/web/img/portade.png');
-    }
+#contact:before {
+  content: "";
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
 </style>
 @endsection

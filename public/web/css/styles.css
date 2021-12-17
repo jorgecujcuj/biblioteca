@@ -11426,8 +11426,8 @@ header.masthead {
   padding-top: 6.5rem;
   padding-bottom: 13rem;
   text-align: center;
-  /*color: #fff;
-  background-image: url("/web/img/pr.jpg");*/
+  color: #00aeff;
+  background-image: url("/web/img/portade.png");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11744,6 +11744,7 @@ header.masthead .masthead-heading {
 .img-brand {
   height: 2.75rem;
 }
+/*AGRAGUE
 #contact:before {
   content: "";
   position: absolute;
@@ -11753,7 +11754,7 @@ header.masthead .masthead-heading {
   top: 0;
   left: 0;
   opacity: 0.5;
-}
+}*/
 
 section#contact {
   position: relative;

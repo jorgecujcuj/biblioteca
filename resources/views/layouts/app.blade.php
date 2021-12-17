@@ -57,7 +57,6 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('busquedas.*') ? 'active' : ''}}" href="{{ url('Libros') }}">{{ __('Libros') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">{{ __('Comentarios') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#Datos">{{ __('Contacto') }}</a></li>
                         @if(Auth::check())
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('categorias.*') ? 'active' : ''}}" href="{{ url('Categorias') }}">{{ __('Categorias') }}</a></li>
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('autores.*') ? 'active' : ''}}" href="{{ url('Autores') }}">{{ __('Autores') }}</a></li>
@@ -107,7 +106,7 @@
     </header>
 
     <!-- Libros Grid-->
-    <section class="page-section bg-light">
+    <section class="page-section bg-light text-center">
         <div class="container">
             @yield('content')
         </div>
@@ -121,29 +120,35 @@
     </section>
 
     <!-- Clients-->
-    <div class="py-5" id="Datos">
+    <footer class="footer py-4" id="Datos">
             <div class="container">
                 <div class="text-center">
                     <div class="row align-items-center">
-                        <h4 style="font-family: Poppins-Bold; font-size: 39px;">Encuéntranos</h4>
-                            <p class="lead" style="font-family: Poppins-Bold;">
-                                Dirección:
-                                <br>
-                                Calle Principal 123
-                                <br>
-                                New York, NY 10001
-                                <br>
-                                Hora:
-                                <br>
-                                Monday-Friday: 9:00AM - 5:00PM
-                                <br>
-                                Sábado y domingo: 11:00AM a 3:00PM
+                        <h4 style="font-family: Poppins-Bold; font-size: 29px;">Encuéntranos</h4>
+                            <p>
+								<strong>Dirección:</strong> 
+								Calle Principal 123 New York, NY 10001
+                                <br> 
+                                <strong>Hora:</strong>
+								Monday-Friday: 9:00AM - 5:00PM / Sábado y domingo: 11:00AM a 3:00PM
                             </p>
+                            
+                            <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2021</div>
+                            <div class="col-lg-4 my-3 my-lg-0">
+                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                            <div class="col-lg-4 text-lg-end">
+                                <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                                <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
-   
+    </footer>
+
     <!-- AgregueBootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset( 'web/js/scripts.js') }}" defer></script>
