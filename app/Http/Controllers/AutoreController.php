@@ -53,7 +53,7 @@ class AutoreController extends Controller
         $autore = Autore::create($request->all());
 
         return redirect()->route('autores.index')
-            ->with('success', 'Autore created successfully.');
+            ->with('success', 'El autor se ha creada con éxito...');
     }
 
     /**
@@ -96,7 +96,7 @@ class AutoreController extends Controller
         $autore->update($request->all());
 
         return redirect()->route('autores.index')
-            ->with('success', 'Autore updated successfully');
+            ->with('success', 'El autor ha sido editado con éxito...');
     }
 
     /**
@@ -109,6 +109,6 @@ class AutoreController extends Controller
         $autore = Autore::find($idautor)->delete();
 
         return redirect()->route('autores.index')
-            ->with('success', 'Autore deleted successfully');
+            ->with('success', 'El autor se ha eliminado con éxito...');
     }
 }

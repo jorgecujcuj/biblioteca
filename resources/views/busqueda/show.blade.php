@@ -13,7 +13,12 @@
         <div class="text-center">
             <div class="row align-items-center">
                 <h4 style="font-family: Poppins-Bold; font-size: 29px;">
-                    <strong>Libro</strong> 
+                    <strong>Libro</strong>
+                    <br>                                                              
+                    <img type="image/*" class="img-fluid img-thumbnail"
+                    src="/datalibros/{{ $libro->imglibro }}"
+                    width="185px" alt="...">
+                    <br>
                 </h4>
                 <p>
                     <strong>Nombre:</strong> 
@@ -92,6 +97,11 @@
 
 @section('css')
 <style>
+/*
+.container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1307px;
+}*/
+
 #pdf {
   position: relative;
   overflow: hidden;

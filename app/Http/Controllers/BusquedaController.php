@@ -18,6 +18,7 @@ class BusquedaController extends Controller
      */
     public function index(Request $request)
     {
+        $message='';
         $name = trim($request->get('name'));
 
         $libros=DB::table('libros')
@@ -31,7 +32,7 @@ class BusquedaController extends Controller
         ->orderBy('libros.titulolibro')
         ->paginate(8);
 
-        return view('busqueda.index', compact('libros','name'));
+        return view('busqueda.index', compact('libros','name','message'));
     }
 
     /**
@@ -49,7 +50,7 @@ class BusquedaController extends Controller
         ->join('categorias','categorias.idcategoria', '=' ,'libros.idcategoria')
         ->join('autores','autores.idautor', '=' ,'libros.idautor')
         ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
-         'autores.nombreautor as autor', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
+         'autores.nombreautor as autor', 'libros.imglibro as imglibro', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
          ->where('libros.idlibro',$idlibro)->first();
 

@@ -61,7 +61,7 @@
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('categorias.*') ? 'active' : ''}}" href="{{ url('Categorias') }}">{{ __('Categorias') }}</a></li>
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('autores.*') ? 'active' : ''}}" href="{{ url('Autores') }}">{{ __('Autores') }}</a></li>
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('libros.*') ? 'active' : ''}}" href="{{ url('DBLibros') }}">{{ __('DBLibros') }}</a></li>
-                        <li class="nav-item"><a class="nav-link {{request()->routeIs('comentarios.*') ? 'active' : ''}}" href="{{ url('Comentarios') }}">{{ __('Comentarios') }}</a></li>
+                        <li class="nav-item"><a class="nav-link {{request()->routeIs('comentarios.*') ? 'active' : ''}}" href="{{ url('Comentarios') }}">{{ __('Ver Comentarios') }}</a></li>
                         @endif
 
                         @guest

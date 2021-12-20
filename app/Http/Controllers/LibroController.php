@@ -36,7 +36,7 @@ class LibroController extends Controller
         ->join('categorias','categorias.idcategoria', '=' ,'libros.idcategoria')
         ->join('autores','autores.idautor', '=' ,'libros.idautor')
         ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
-         'autores.nombreautor as autor', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
+         'autores.nombreautor as autor','libros.imglibro as imglibro', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
          //->where('operaciones.created_at','LIKE','%'.$texto.'%')
         ->orderBy('libros.titulolibro')
@@ -101,7 +101,7 @@ class LibroController extends Controller
         //datalibros
   
         return redirect()->route('libros.index')
-            ->with('success', 'Libro created successfully.');
+            ->with('success', 'Libro creada con éxito...');
     }
 
     /**
@@ -187,7 +187,7 @@ class LibroController extends Controller
         //$libro->update($request->all());
 
         return redirect()->route('libros.index')
-            ->with('success', 'Libro updated successfully');
+            ->with('success', 'Libro editado con éxito...');
     }
 
     /**
@@ -213,6 +213,6 @@ class LibroController extends Controller
         $libro = Libro::find($idlibro)->delete();
 
         return redirect()->route('libros.index')
-            ->with('success', 'Libro deleted successfully');
+            ->with('success', 'Libro eliminado con éxito...');
     }
 }

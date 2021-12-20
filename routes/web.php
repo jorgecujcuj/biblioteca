@@ -30,8 +30,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::resource('sasdadsasd', CategoriaController::class)->parameters(['categorias' => 'categoria'])->names('categorias');
-//Route::resource('categorias', CategoriaController::class);
 Route::resource('Categorias', CategoriaController::class)->parameters(['Categorias' => 'categoria'])->names('categorias');
 Route::resource('Autores', AutoreController::class)->parameters(['Autores' => 'autore'])->names('autores');
 Route::resource('DBLibros', LibroController::class)->parameters(['DBLibros' => 'libro'])->names('libros');

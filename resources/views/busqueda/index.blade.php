@@ -34,23 +34,21 @@
         </form>
     </div>
     <br></br>
+    
     <div class="row">                           
                    
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
+            <div class="alert alert-success" style="color: black; background-color: rgba(28, 215, 255, .2); border:none;">
+                <b><p>{{ $message }}</p></b>
             </div>
-        @endif
-
+        
             <div class="row"> 
                 @foreach ($libros as $libro)
-                    <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="col-lg-3 col-sm-6 mb-4">
                         <div class="card card-body text-center">
 
-                            <img type="image/*"
+                            <img type="image/*" class="img-fluid img-thumbnail"
                             src="/datalibros/{{ $libro->imglibro }}"
-                            width="auto"
-                            height="auto">
+                            width="auto" alt="...">
 
                             <h5 class="font-weight-bold mt-3">{{ $libro->titulolibro }}</h5>
                             <p>
@@ -95,7 +93,7 @@
 
                                             <div class="card-body">
                                                 @if ($message = Session::get('success'))
-                                                    <div class="alert alert-success" style="color: #FFFFFF; background-color: rgba(28, 215, 255, .2); border:none;">
+                                                    <div class="alert alert-success" style="color: #FFFFFF; background-color: rgba(28, 215, 255, .5); border:none;">
                                                        <h3> <p>{{ $message }}</p></h3>
                                                     </div>
                                                 @endif

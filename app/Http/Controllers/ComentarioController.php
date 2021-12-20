@@ -18,7 +18,7 @@ class ComentarioController extends Controller
      */
     public function index()
     {
-        $comentarios = Comentario::paginate();
+        $comentarios = Comentario::paginate(10);
 
         return view('comentario.index', compact('comentarios'))
             ->with('i', (request()->input('page', 1) - 1) * $comentarios->perPage());
@@ -48,7 +48,7 @@ class ComentarioController extends Controller
         $comentario = Comentario::create($request->all());
 
         return redirect()->route('comentarios.index')
-            ->with('success', 'Comentario created successfully.');
+            ->with('success', 'Comentario enviado con éxito...');
     }
 
     /**
@@ -91,7 +91,7 @@ class ComentarioController extends Controller
         $comentario->update($request->all());
 
         return redirect()->route('comentarios.index')
-            ->with('success', 'Comentario updated successfully');
+            ->with('success', 'Comentario editado con éxito...');
     }
 
     /**
@@ -104,6 +104,6 @@ class ComentarioController extends Controller
         $comentario = Comentario::find($id)->delete();
 
         return redirect()->route('comentarios.index')
-            ->with('success', 'Comentario deleted successfully');
+            ->with('success', 'Comentario eliminado con éxito...');
     }
 }

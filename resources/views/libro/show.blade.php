@@ -14,11 +14,16 @@
             <div class="row align-items-center">
                 <h4 style="font-family: Poppins-Bold; font-size: 29px;">
                     <strong>Libro</strong> 
+                    <br>                                                              
+                    <img type="image/*" class="img-fluid img-thumbnail"
+                    src="/datalibros/{{ $libro->imglibro }}"
+                    width="185px" alt="...">
+                    <br>
                 </h4>
                 <p>
                     <strong>Idlibro:</strong>
                     {{ $libro->idlibro }}
-                    <br>
+                    <br>                      
                     <strong>Nombre:</strong> 
 					{{ $libro->titulolibro }}
                     <br> 

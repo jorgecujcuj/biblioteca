@@ -16,7 +16,7 @@
                         <span class="card-title">Update Comentario</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('comentarios.update', $comentario->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('comentarios.update', $comentario->idcomentario) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
