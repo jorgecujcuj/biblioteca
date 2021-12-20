@@ -14,7 +14,7 @@
                     <label  class="col-md-4 col-form-label text-md-right"></label>
                         <div class="col-md-6">
                             <span class="login100-form-title p-b-70" style="font-family: Poppins-Bold; font-size: 39px;">
-                            {{ __('Crear una categoría:') }}
+                            {{ __('Crear categoría:') }}
                             </span>
                         </div>
                 </div>  

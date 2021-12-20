@@ -27,7 +27,8 @@ class Libro extends Model
 		'iduser' => 'required',
 		'idcategoria' => 'required',
 		'idautor' => 'required',
-
+    'imglibro' => 'required|image|max:2048',
+    'titulolibro' => 'nullable|file|mimes:pdf',
     ];
 
     protected $perPage = 20;
@@ -39,7 +40,7 @@ class Libro extends Model
      *
      * @var array
      */
-    protected $fillable = ['iduser','idcategoria','idautor','titulolibro','idiomalibro','descripcionlibro'];
+    protected $fillable = ['iduser','idcategoria','idautor','imglibro','titulolibro','idiomalibro','descripcionlibro'];
 
 
 

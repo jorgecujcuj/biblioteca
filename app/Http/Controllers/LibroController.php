@@ -70,6 +70,7 @@ class LibroController extends Controller
     {
         request()->validate(Libro::$rules);
         $archivo;
+        $img;
         try {
             DB::beginTransaction();
             $lib=new Libro;
@@ -82,6 +83,13 @@ class LibroController extends Controller
                 $lib->titulolibro=$archivo->getClientOriginalName();
                 //return $lib;
             }
+            if($request->hasFile('imglibro')){
+                $img=$request->file('imglibro');
+                $img->move(public_path().'/datalibros/',$img->getClientOriginalName());
+                $lib->imglibro=$img->getClientOriginalName();
+                //return $lib;
+            }
+
             $lib->idiomalibro=$request->get('idiomalibro');
             $lib->descripcionlibro=$request->get('descripcionlibro');
             $lib->save();
@@ -155,6 +163,18 @@ class LibroController extends Controller
                 $archivo->move(public_path().'/datalibros/',$archivo->getClientOriginalName());
                 $lib->titulolibro=$archivo->getClientOriginalName();
             }
+            if($request->hasFile('imglibro')){
+
+                $destination = public_path().'/datalibros/'.$lib->imglibro;
+                if(File::exists($destination)){
+                   File::delete($destination);
+                }
+
+                $img=$request->file('imglibro');
+                $img->move(public_path().'/datalibros/',$img->getClientOriginalName());
+                $lib->imglibro=$img->getClientOriginalName();
+            }
+
             $lib->idiomalibro=$request->get('idiomalibro');
             $lib->descripcionlibro=$request->get('descripcionlibro');
 
@@ -179,10 +199,15 @@ class LibroController extends Controller
     {
         $lib = Libro::find($idlibro);
 
-        $destination = public_path().'/datalibros/'.$lib->titulolibro;
+        $destinationuno = public_path().'/datalibros/'.$lib->titulolibro;
+        $destinationdos = public_path().'/datalibros/'.$lib->imglibro;
 
-        if(File::exists($destination)){
-            File::delete($destination);
+        if(File::exists($destinationuno)){
+            File::delete($destinationuno);
+        }
+
+        if(File::exists($destinationdos)){
+            File::delete($destinationdos);
         }
 
         $libro = Libro::find($idlibro)->delete();

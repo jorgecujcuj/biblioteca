@@ -47,8 +47,8 @@
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="card card-body text-center">
 
-                            <embed type="application/pdf"
-                            src="/datalibros/{{ $libro->titulolibro }}"
+                            <img type="image/*"
+                            src="/datalibros/{{ $libro->imglibro }}"
                             width="auto"
                             height="auto">
 

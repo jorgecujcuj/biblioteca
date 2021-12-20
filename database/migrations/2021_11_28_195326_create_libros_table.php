@@ -18,6 +18,7 @@ class CreateLibrosTable extends Migration
             $table->unsignedBigInteger('iduser');
             $table->unsignedBigInteger('idcategoria');
             $table->unsignedBigInteger('idautor');
+            $table->string('imglibro',100);
             $table->string('titulolibro',100);
             $table->string('idiomalibro',25)->nullable();
             $table->string('descripcionlibro',75)->nullable();

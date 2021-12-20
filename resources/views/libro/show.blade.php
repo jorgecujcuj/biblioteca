@@ -4,67 +4,48 @@
     {{ $libro->name ?? 'Show Libro' }}
 @endsection
 
+@section('portada')
+        <div class="masthead-heading">Biblioteca Virtual</div>
+        <div class="masthead-subheading">Santiago Atitlán, Sololá</div>
+@endsection
+
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Show Libro</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('libros.index') }}"> Back</a>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>Idlibro:</strong>
-                            {{ $libro->idlibro }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Iduser:</strong>
-                            {{ $libro->iduser }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Idcategoria:</strong>
-                            {{ $libro->idcategoria }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Idautor:</strong>
-                            {{ $libro->idautor }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Titulolibro:</strong>
-                            {{ $libro->titulolibro }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Idiomalibro:</strong>
-                            {{ $libro->idiomalibro }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Descripcionlibro:</strong>
-                            {{ $libro->descripcionlibro }}
-                        </div>
-
-                    </div>
+<div class="text-center">
+            <div class="row align-items-center">
+                <h4 style="font-family: Poppins-Bold; font-size: 29px;">
+                    <strong>Libro</strong> 
+                </h4>
+                <p>
+                    <strong>Idlibro:</strong>
+                    {{ $libro->idlibro }}
+                    <br>
+                    <strong>Nombre:</strong> 
+					{{ $libro->titulolibro }}
+                    <br> 
+				    <strong>Idcategoria:</strong> 
+					{{ $libro->idcategoria }}
+                    <br> 
+                    <strong>Idautor:</strong>
+					{{ $libro->idautor }}
+                    <br> 
+                    <strong>Idiomalibro:</strong>
+                    {{ $libro->idiomalibro }}
+                    <br> 
+                    <strong>Descripcionlibro:</strong>
+                    {{ $libro->descripcionlibro }}
+                </p>
+                <br>
+                <div class="col-xs-1 center-block">
+                    <a class="btn btn-primary" href="{{ route('libros.index') }}"> REGRESAR</a>
                 </div>
             </div>
         </div>
-    </section>
+        <br></br>
 
-    <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">{{ $libro->titulolibro }}</span>
-                        </div>
-                    </div>
-
+                <div class="card border-primary mb-3">
+ 
                     <div class="card-body">
 
                             <div class="container" id="pdf">
@@ -77,7 +58,6 @@
                 </div>
             </div>
         </div>
-    </section>
 @endsection
 
 @section('css')
