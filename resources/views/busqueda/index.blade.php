@@ -12,8 +12,8 @@
 @section('content')
 
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Ingresar el nombre del libro que deseas buscar:</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h2 class="section-heading text-uppercase">Puede buscar por: nombre del libro, categoría o autor</h2>
+            <h3 class="section-subheading text-muted">Ingrese el texto y clic en buscar</h3>
         </div>
 
     
@@ -22,7 +22,7 @@
             <div class="row">
 
                 <div class="col">
-                    <input class="form-control form-control-lg" type="search" placeholder="Nombre del libro" aria-label="Search" id="name" name="name" value="{{ $name }}" autofocus>
+                    <input class="form-control form-control-lg" type="search" placeholder="Nombre del libro, categoría o autor" aria-label="Search" id="name" name="name" value="{{ $name }}" autofocus>
                 </div>
 
                 
@@ -36,11 +36,11 @@
     <br></br>
     
     <div class="row">                           
-                   
+            <!--       
             <div class="alert alert-success" style="color: black; background-color: rgba(28, 215, 255, .2); border:none;">
-                <b><p>{{ $message }}</p></b>
+                <b><p></p></b>
             </div>
-        
+            -->
             <div class="row"> 
                 @foreach ($libros as $libro)
                     <div class="col-lg-3 col-sm-6 mb-4">

@@ -11,13 +11,31 @@
 
 @section('content')
     <div class="section-header">
-        <h3 class="page__heading">Tabla de Categoría</h3>
+        <h3 class="page__heading">Tabla de DB libros</h3>
     </div>
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+
+                        <div class="col-xl-6 mx-auto">    
+                            <form action="{{ route('libros.index') }}" method="get">    
+                                <div class="row">
+
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" type="search" placeholder="Nombre del libro, categoría o autor" aria-label="Search" id="name" name="name" value="{{ $name }}" autofocus>
+                                    </div>
+
+                                    
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+                                    </div>
+                                
+                                </div>
+                            </form>
+                        </div>
+                        <br></br>
  
                             <a href="{{ route('libros.create') }}" class="btn btn-primary float-right"  data-placement="left">
                                 {{ __('Crear libro') }}
