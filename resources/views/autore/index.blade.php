@@ -19,14 +19,22 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                             
-                            <a href="{{ route('autores.create') }}" class="btn btn-primary float-right"  data-placement="left">
-                                {{ __('Crear autor') }}
-                            </a>
- 
+
+                            <div class="d-flex justify-content-between">
+                                <h4 class="card-title">Autores</h4>
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right bg-primary">
+                                            <a href="{{ route('autores.create') }}" class="dropdown-item text-white bg-primary">{{ __('Crear autor') }}</a>
+                                        </div>
+                                    </div>
+                            </div>
+
                             @if ($message = Session::get('success'))
                             <div class="alert alert-success" style="color: #000000; background-color: rgba(28, 215, 255, .2); border:none;">
-                                <b><p>{{ $message }}</p></b>
+                                <h3> <p>{{ $message }}</p></h3>
                             </div>
                             @endif
 
@@ -34,25 +42,23 @@
                                 <table class="table table-striped mt-2">
                                     <thead style="background-color:#515151">
                                         <tr>
-                                            <th style="color:#fff;">No</th>
                                             <th style="color:#fff;">Id</th>
                                             <th style="color:#fff;">Nombre</th>
                                             <th style="color:#fff;">Descripción</th>
                                             <th style="color:#fff;">Acciones</th>
-                                                
+
                                             </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($autores as $autore)
                                             <tr>
-                                                <td>{{ ++$i }}</td>
-                                                <td>{{ $autore->idautor }}</td>
+                                                <td>{{ $autore->id }}</td>
                                                 <td>{{ $autore->nombreautor }}</td>
                                                 <td>{{ $autore->descripcionautor }}</td>
 
                                                 <td>
-                                                    <form action="{{ route('autores.destroy',$autore->idautor) }}" method="POST">
-                                                        <a class="btn btn-sm btn-success" href="{{ route('autores.edit',$autore->idautor) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <form action="{{ route('autores.destroy',$autore->id) }}" method="POST">
+                                                        <a class="btn btn-sm btn-success" href="{{ route('autores.edit',$autore->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
@@ -63,7 +69,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                             <div class="pagination justify-content-end">
                                 {!! $autores->links() !!}
                             </div>

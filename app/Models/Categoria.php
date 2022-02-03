@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Categoria
  *
- * @property $idcategoria
+ * @property $id
  * @property $nombrecategoria
  * @property $descripcioncategoria
  * @property $created_at
@@ -18,14 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Categoria extends Model
 {
-    
-    static $rules = [
-		'nombrecategoria' => 'required',
-    ];
 
     protected $perPage = 20;
-
-    protected $primaryKey = 'idcategoria';
 
     /**
      * Attributes that should be mass-assignable.

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Autore
  *
- * @property $idautor
+ * @property $id
  * @property $nombreautor
  * @property $descripcionautor
  * @property $created_at
@@ -18,14 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Autore extends Model
 {
-    
-    static $rules = [
-		'nombreautor' => 'required',
-    ];
-
     protected $perPage = 20;
-
-    protected $primaryKey = 'idautor';
 
     /**
      * Attributes that should be mass-assignable.

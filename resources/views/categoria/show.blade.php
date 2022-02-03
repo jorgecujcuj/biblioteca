@@ -14,15 +14,15 @@
                             <span class="card-title">Show Categoria</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('categorias.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('categorias.index') }}"> Regresar</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Idcategoria:</strong>
-                            {{ $categoria->idcategoria }}
+                            {{ $categoria->id }}
                         </div>
                         <div class="form-group">
                             <strong>Nombrecategoria:</strong>

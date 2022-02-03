@@ -17,9 +17,8 @@
             <label for="descripcioncategoria" class="col-md-4 col-form-label text-md-right">{{ __("Descripción") }}</label>
 
             <div class="col-md-6">
-                <input id="descripcioncategoria" type="text" class="form-control @error('descripcioncategoria') is-invalid @enderror" name="descripcioncategoria" value="{{ old('descripcioncategoria',$categoria->descripcioncategoria) }}" placeholder="Descripción" autofocus>
-
-                 @error('descripcioncategoria')
+                <textarea id="descripcioncategoria" class="form-control @error('descripcioncategoria') is-invalid @enderror" name="descripcioncategoria" placeholder="Descripción" autofocus>{{ old('descripcioncategoria',$categoria->descripcioncategoria) }}</textarea>
+                @error('descripcioncategoria')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -30,7 +29,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-danger" href="{{ route('categorias.index') }}"> Regresar</a>
+                <a class="btn btn-danger" href="{{ route('categorias.index') }}"> Cancelar</a>
             </div>
         </div>
 

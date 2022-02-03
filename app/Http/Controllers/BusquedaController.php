@@ -23,9 +23,9 @@ class BusquedaController extends Controller
 
         $libros=DB::table('libros')
         ->join('users','users.id', '=' ,'libros.iduser')
-        ->join('categorias','categorias.idcategoria', '=' ,'libros.idcategoria')
-        ->join('autores','autores.idautor', '=' ,'libros.idautor')
-        ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
+        ->join('categorias','categorias.id', '=' ,'libros.idcategoria')
+        ->join('autores','autores.id', '=' ,'libros.idautor')
+        ->select('libros.id as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
          'autores.nombreautor as autor', 'libros.imglibro as imglibro','libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
          ->where('categorias.nombrecategoria','LIKE','%'.$name.'%')
@@ -45,13 +45,13 @@ class BusquedaController extends Controller
      */
     public function show($idlibro)
     {
-        
+
         //$libro = Libro::find($idlibro);
         $libro=DB::table('libros')
         ->join('users','users.id', '=' ,'libros.iduser')
-        ->join('categorias','categorias.idcategoria', '=' ,'libros.idcategoria')
-        ->join('autores','autores.idautor', '=' ,'libros.idautor')
-        ->select('libros.idlibro as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
+        ->join('categorias','categorias.id', '=' ,'libros.idcategoria')
+        ->join('autores','autores.id', '=' ,'libros.idautor')
+        ->select('libros.id as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
          'autores.nombreautor as autor', 'libros.imglibro as imglibro', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
          ->where('libros.idlibro',$idlibro)->first();

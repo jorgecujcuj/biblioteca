@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Autore;
 use Illuminate\Http\Request;
+use App\Http\Requests\Autor\StoreAutorRequest;
+use App\Http\Requests\Autor\UpdateAutorRequest;
 
 /**
  * Class AutoreController
@@ -25,8 +27,7 @@ class AutoreController extends Controller
     {
         $autores = Autore::paginate();
 
-        return view('autore.index', compact('autores'))
-            ->with('i', (request()->input('page', 1) - 1) * $autores->perPage());
+        return view('autore.index', compact('autores'));
     }
 
     /**
@@ -46,11 +47,10 @@ class AutoreController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAutorRequest $request)
     {
-        request()->validate(Autore::$rules);
 
-        $autore = Autore::create($request->all());
+        Autore::create($request->all());
 
         return redirect()->route('autores.index')
             ->with('success', 'El autor se ha creada con éxito...');
@@ -89,11 +89,11 @@ class AutoreController extends Controller
      * @param  Autore $autore
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autore $autore)
+    public function update(UpdateAutorRequest $request, Autore $autore)
     {
-        request()->validate(Autore::$rules);
+        $data = $request->only('nombreautor','descripcionautor');
 
-        $autore->update($request->all());
+        $autore->update($data);
 
         return redirect()->route('autores.index')
             ->with('success', 'El autor ha sido editado con éxito...');

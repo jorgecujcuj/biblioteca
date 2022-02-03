@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\Categoria\StoreCategoriaRequest;
+use App\Http\Requests\Categoria\UpdateCategoriaRequest;
 
 /**
  * Class CategoriaController
@@ -12,7 +14,7 @@ use Illuminate\Http\Request;
 class CategoriaController extends Controller
 {
 
-    
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,8 +29,7 @@ class CategoriaController extends Controller
     {
         $categorias = Categoria::paginate();
 
-        return view('categoria.index', compact('categorias'))
-            ->with('i', (request()->input('page', 1) - 1) * $categorias->perPage());
+        return view('categoria.index', compact('categorias'));
     }
 
     /**
@@ -48,11 +49,9 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoriaRequest $request)
     {
-        request()->validate(Categoria::$rules);
-
-        $categoria = Categoria::create($request->all());
+        Categoria::create($request->all());
 
         return redirect()->route('categorias.index')
             ->with('success', 'La categoría se ha creada con éxito...');
@@ -91,11 +90,11 @@ class CategoriaController extends Controller
      * @param  Categoria $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        request()->validate(Categoria::$rules);
+        $data = $request->only('nombrecategoria','descripcioncategoria');
 
-        $categoria->update($request->all());
+        $categoria->update($data);
 
         return redirect()->route('categorias.index')
             ->with('success', 'La categoría ha sido editada con éxito...');

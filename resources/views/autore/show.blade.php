@@ -14,15 +14,15 @@
                             <span class="card-title">Show Autore</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('autores.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('autores.index') }}"> Regresar</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Idautor:</strong>
-                            {{ $autore->idautor }}
+                            {{ $autore->id }}
                         </div>
                         <div class="form-group">
                             <strong>Nombreautor:</strong>

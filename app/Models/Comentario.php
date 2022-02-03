@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Comentario
  *
- * @property $idcomentario
+ * @property $id
  * @property $comentario
  * @property $nombreautor
  * @property $email
@@ -19,16 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comentario extends Model
 {
-    
-    static $rules = [
-    'comentario' => ['required', 'string', 'min:10', 'max:255'],
-    'nombreautor' => ['required', 'string', 'min:4','max:45'],
-    'email' => ['required', 'string', 'email:rfc,dns', 'max:100'],
-    ];
 
     protected $perPage = 20;
-
-    protected $primaryKey = 'idcomentario';
 
     /**
      * Attributes that should be mass-assignable.

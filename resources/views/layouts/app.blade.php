@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('web/img/favicon.ico') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Agregue -->
@@ -47,7 +47,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -61,7 +61,7 @@
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('categorias.*') ? 'active' : ''}}" href="{{ url('Categorias') }}">{{ __('Categorias') }}</a></li>
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('autores.*') ? 'active' : ''}}" href="{{ url('Autores') }}">{{ __('Autores') }}</a></li>
                         <li class="nav-item"><a class="nav-link {{request()->routeIs('libros.*') ? 'active' : ''}}" href="{{ url('DBLibros') }}">{{ __('DBLibros') }}</a></li>
-                        <li class="nav-item"><a class="nav-link {{request()->routeIs('comentarios.*') ? 'active' : ''}}" href="{{ url('Comentarios') }}">{{ __('Ver Comentarios') }}</a></li>
+                        <li class="nav-item"><a class="nav-link {{request()->routeIs('comentarios.*') ? 'active' : ''}}" href="{{ url('Comentarios') }}">{{ __('Ver Coment.') }}</a></li>
                         @endif
 
                         @guest
@@ -77,9 +77,9 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }}
                                     </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
+
+                                <div class="dropdown-menu dropdown-menu-right bg-dark text-white" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item bg-dark text-white" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();">
                                                 {{ __('Cerrar Sesiono') }}
@@ -89,7 +89,7 @@
                                                 @csrf
                                             </form>
                                 </div>
-                            </li>      
+                            </li>
                         @endguest
 
                     </ul>
@@ -125,20 +125,21 @@
                 <div class="text-center">
                     <div class="row align-items-center">
                         <h4 style="font-family: Poppins-Bold; font-size: 29px;">Encuéntranos</h4>
-                            <p>
-								<strong>Dirección:</strong> 
-								Calle Principal 123 New York, NY 10001
-                                <br> 
-                                <strong>Hora:</strong>
-								Monday-Friday: 9:00AM - 5:00PM / Sábado y domingo: 11:00AM a 3:00PM
-                            </p>
-                            
-                            <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2021</div>
-                            <div class="col-lg-4 my-3 my-lg-0">
-                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
+                        <p>
+                            <strong>Dirección:</strong>
+                            Cantón Tzanjuyú, Santiago Atitlán.
+                            <br>
+                            <strong>Hora:</strong>
+                                Lunes a Viernes: 8:00AM - 5:00PM
+                        </p>
+
+                        <div class="col-lg-4 text-lg-start">Santiago Atitlán</div>
+                        <div class="col-lg-4 my-3 my-lg-0">
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/MuniAtitlan"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://munisantiagoatitlan.gob.gt/"><i class="fab fa-chrome"></i></a>
+                        </div>
                             <div class="col-lg-4 text-lg-end">
                                 <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
                                 <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>

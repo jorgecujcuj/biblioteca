@@ -14,11 +14,10 @@ class CreateAutoresTable extends Migration
     public function up()
     {
         Schema::create('autores', function (Blueprint $table) {
-            $table->bigIncrements('idautor');
-            $table->string('nombreautor',40);
-            $table->string('descripcionautor',75)->nullable();
+            $table->id();
+            $table->string('nombreautor',40)->unique();
+            $table->string('descripcionautor',125)->nullable();
             $table->timestamps();
-            $table->unique(['nombreautor']);
         });
     }
 

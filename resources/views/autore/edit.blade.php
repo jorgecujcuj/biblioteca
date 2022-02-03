@@ -16,12 +16,12 @@
                             {{ __('Editar autor:') }}
                             </span>
                         </div>
-                </div>  
+                </div>
 
                 @includeif('partials.errors')
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('autores.update', $autore->idautor) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('autores.update', $autore->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
