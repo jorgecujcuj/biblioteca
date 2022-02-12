@@ -1,3 +1,4 @@
+<!--
 <div class="box box-info padding-1">
     <div class="box-body">
 
@@ -10,7 +11,7 @@
             <select class="form-control" name="idcategoria">
                     <option value="" selected disabled> - Selecciona una categoria - </option>
                     @foreach ($categoria as $cat)
-                    <option value="{{ $cat->idcategoria }}" {{$cat->idcategoria == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
+                    <option value="{{ $cat->id}}" {{$cat->id == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
                     @endforeach
             </select>
             @error('idcategoria')
@@ -23,7 +24,7 @@
             <select class="form-control" name="idautor">
                     <option value="" selected disabled> - Selecciona una categoria - </option>
                     @foreach ($autor as $aut)
-                    <option value="{{ $aut->idautor }}" {{$aut->idautor == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
+                    <option value="{{ $aut->id }}" {{$aut->id == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
                     @endforeach
             </select>
             @error('idautor')
@@ -69,3 +70,4 @@ function cambiarFile(){
 }
 </script>
 @endsection
+-->

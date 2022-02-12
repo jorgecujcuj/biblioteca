@@ -24,13 +24,13 @@ class storeLibroRequest extends FormRequest
     public function rules()
     {
         return [
-            'iduser' => 'required',
-            'idcategoria' => 'required',
-            'idautor' => 'required',
-            'imglibro' => 'image|mimes:jpeg,png,jpg,gif|max:2048|unique:libros,imglibro',
-            'titulolibro' => 'file|mimes:pdf|unique:libros,titulolibro',
-            'idiomalibro' => 'nullable|max:15',
-            'descripcionlibro' => 'nullable|max:75'
+            'iduser' => ['required'],
+            'idcategoria' => ['required'],
+            'idautor' => ['required'],
+            'imglibro' => ['required','image','mimes:jpeg,png,jpg,gif','max:2048','unique:libros,imglibro'],
+            'titulolibro' => ['required','file','mimes:pdf','unique:libros,titulolibro'],
+            'idiomalibro' => ['nullable','max:15'],
+            'descripcionlibro' => ['nullable','max:120'],
         ];
     }
 }

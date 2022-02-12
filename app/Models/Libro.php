@@ -25,6 +25,8 @@ class Libro extends Model
 
     protected $perPage = 20;
 
+    protected $primaryKey = 'id';
+
     /**
      * Attributes that should be mass-assignable.
      *

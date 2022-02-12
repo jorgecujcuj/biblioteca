@@ -21,7 +21,7 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right bg-primary">
-                                            <a href="{{ route('categorias.create') }}" class="dropdown-item text-white bg-primary">{{ __('Crear categoría') }}</a>
+                                            <a href="{{ route('categorias.create') }}" class="dropdown-item text-white bg-primary">{{ __('Crear Categoría') }}</a>
                                         </div>
                                     </div>
 

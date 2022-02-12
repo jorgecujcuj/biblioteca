@@ -18,7 +18,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                       
+
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     <p>{{ $message }}</p>
@@ -29,7 +29,6 @@
                                 <table class="table table-striped mt-2">
                                     <thead style="background-color:#515151">
                                         <tr>
-                                            <th style="color:#fff;">No</th>
                                             <th style="color:#fff;">Id</th>
                                             <th style="color:#fff;">Comentario</th>
                                             <th style="color:#fff;">Nombre</th>
@@ -40,9 +39,8 @@
                                     <tbody>
                                         @foreach ($comentarios as $comentario)
                                             <tr>
-                                                <td>{{ ++$i }}</td>
-                                                
-                                                <td>{{ $comentario->idcomentario }}</td>
+
+                                                <td>{{ $comentario->id }}</td>
                                                 <td>{{ $comentario->comentario }}</td>
                                                 <td>{{ $comentario->nombreautor }}</td>
                                                 <td>{{ $comentario->email }}</td>

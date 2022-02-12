@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //AGREGUE
-use App\Models\Libro;
 use App\Models\Comentario;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use App\Http\Requests\Comentario\StoreComentarioRequest;
+
 
 class BusquedaController extends Controller
 {
@@ -18,7 +19,9 @@ class BusquedaController extends Controller
      */
     public function index(Request $request)
     {
-        /*$message='';*/
+
+        $categorias = Categoria::orderby('nombrecategoria')->get();
+
         $name = trim($request->get('name'));
 
         $libros=DB::table('libros')
@@ -34,7 +37,7 @@ class BusquedaController extends Controller
         ->orderBy('libros.titulolibro')
         ->paginate(8);
 
-        return view('busqueda.index', compact('libros','name'));
+        return view('busqueda.index', compact('categorias','libros','name'));
     }
 
     /**
@@ -43,10 +46,9 @@ class BusquedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idlibro)
+    public function show($id)
     {
 
-        //$libro = Libro::find($idlibro);
         $libro=DB::table('libros')
         ->join('users','users.id', '=' ,'libros.iduser')
         ->join('categorias','categorias.id', '=' ,'libros.idcategoria')
@@ -54,10 +56,10 @@ class BusquedaController extends Controller
         ->select('libros.id as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
          'autores.nombreautor as autor', 'libros.imglibro as imglibro', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
-         ->where('libros.idlibro',$idlibro)->first();
+         ->where('libros.id',$id)->first();
 
         return view('busqueda.show', compact('libro'));
-        //return $libro;
+
     }
 
     /**
@@ -78,11 +80,10 @@ class BusquedaController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComentarioRequest $request)
     {
-        request()->validate(Comentario::$rules);
 
-        $comentario = Comentario::create($request->all());
+        Comentario::create($request->all());
 
         $mensaje = "Comentario enviado con éxito";
 

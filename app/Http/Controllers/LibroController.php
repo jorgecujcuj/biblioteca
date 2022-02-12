@@ -9,7 +9,10 @@ use App\Models\Categoria;
 use App\Models\Autore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\Libro\storeLibroRequest;
+use App\Http\Requests\Libro\updateLibroRequest;
 use Illuminate\Support\Facades\File;
+
 
 /**
  * Class LibroController
@@ -36,7 +39,7 @@ class LibroController extends Controller
         ->join('users','users.id', '=' ,'libros.iduser')
         ->join('categorias','categorias.id', '=' ,'libros.idcategoria')
         ->join('autores','autores.id', '=' ,'libros.idautor')
-        ->select('libros.id as idlibro','users.name as usuario' ,'categorias.nombrecategoria as categoria',
+        ->select('libros.id as id','users.name as usuario' ,'categorias.nombrecategoria as categoria',
          'autores.nombreautor as autor','libros.imglibro as imglibro', 'libros.titulolibro as titulolibro', 'libros.idiomalibro as idioma',
          'libros.descripcionlibro as descripcionlibro', 'libros.created_at as fecha')
          ->where('categorias.nombrecategoria','LIKE','%'.$name.'%')
@@ -45,8 +48,7 @@ class LibroController extends Controller
         ->orderBy('libros.titulolibro')
         ->paginate(15);
 
-        return view('libro.index', compact('libros','name'))
-            ->with('i', (request()->input('page', 1) - 1) * $libros->perPage());
+        return view('libro.index', compact('libros','name'));
     }
 
     /**
@@ -56,10 +58,9 @@ class LibroController extends Controller
      */
     public function create()
     {
-
         $libro = new Libro();
-        $categoria = Categoria::orderBy('nombrecategoria')->get();
-        $autor = Autore::orderBy('nombreautor')->get();
+        $categoria = Categoria::orderBy('id')->get();
+        $autor = Autore::orderBy('id')->get();
         return view('libro.create', compact('libro','categoria','autor'));
     }
 
@@ -69,53 +70,78 @@ class LibroController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeLibroRequest $request)
     {
-        request()->validate(Libro::$rules);
-        //$archivo;
-        //$img;
+        /*$request->validate([
+            'iduser' => ['required'],
+            'idcategoria' => ['required'],
+            'idautor' => ['required'],
+            'imglibro' => ['required','image','mimes:jpeg,png,jpg,gif','max:2048','unique:libros,imglibro'],
+            'titulolibro' => ['required','file','mimes:pdf','unique:libros,titulolibro'],
+            'idiomalibro' => ['nullable','max:15'],
+            'descripcionlibro' => ['nullable','max:120'],
+        ]);*/
+
         try {
             DB::beginTransaction();
             $lib=new Libro;
             $lib->iduser=$request->get('iduser');
             $lib->idcategoria=$request->get('idcategoria');
             $lib->idautor=$request->get('idautor');
-            if($request->hasFile('titulolibro')){
-                $archivo=$request->file('titulolibro');
-                $archivo->move(public_path().'/datalibros/',$archivo->getClientOriginalName());
-                $lib->titulolibro=$archivo->getClientOriginalName();
-                //return $lib;
+
+            $imgexite=$request->file('imglibro')->getClientOriginalName();
+            if (Libro::where('imglibro', $imgexite)->exists()) {
+                $mensaje = "El libro ya existe verifique el nombre de la Portada.";
+                return redirect()->route('libros.index')
+                    ->with('success', $mensaje);
             }
+
+            $pdfexite=$request->file('titulolibro')->getClientOriginalName();
+            if (Libro::where('titulolibro', $pdfexite)->exists()) {
+                $mensaje = "El libro ya existe verifique el nombre del PDF.";
+                return redirect()->route('libros.index')
+                    ->with('success', $mensaje);
+            }
+
             if($request->hasFile('imglibro')){
                 $img=$request->file('imglibro');
                 $img->move(public_path().'/datalibros/',$img->getClientOriginalName());
                 $lib->imglibro=$img->getClientOriginalName();
-                //return $lib;
+            }
+
+            if($request->hasFile('titulolibro')){
+                $archivo=$request->file('titulolibro');
+                $archivo->move(public_path().'/datalibros/',$archivo->getClientOriginalName());
+                $lib->titulolibro=$archivo->getClientOriginalName();
             }
 
             $lib->idiomalibro=$request->get('idiomalibro');
             $lib->descripcionlibro=$request->get('descripcionlibro');
             $lib->save();
             DB::commit();
+            $mensaje = "Libro creada con éxito...";
         } catch (Exception $e) {
             DB::rollback();
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                $mensaje = "El libro ya existe verifique el nombre de la Portada y el PDF";
+            }
+
         }
-        //$libro = Libro::create($request->all());
-        //datalibros
 
         return redirect()->route('libros.index')
-            ->with('success', 'Libro creada con éxito...');
+            ->with('success', $mensaje);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $idlibro
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idlibro)
+    public function show($id)
     {
-        $libro = Libro::find($idlibro);
+        $libro = Libro::find($id);
 
         return view('libro.show', compact('libro'));
     }
@@ -123,12 +149,12 @@ class LibroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $idlibro
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($idlibro)
+    public function edit($id)
     {
-        $libro = Libro::find($idlibro);
+        $libro = Libro::find($id);
         $categoria = Categoria::orderBy('nombrecategoria')->get();
         $autor = Autore::orderBy('nombreautor')->get();
 
@@ -142,12 +168,18 @@ class LibroController extends Controller
      * @param  Libro $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $libro)
+    public function update(updateLibroRequest $request, $libro)
     {
-        request()->validate(Libro::$rules);
-
-        //$lib = Libro::find($libro);
-        //return $lib;
+        /*
+        $request->validate([
+            'iduser' => ['required'],
+            'idcategoria' => ['required'],
+            'idautor' => ['required'],
+            'imglibro' => ['image','mimes:jpeg,png,jpg,gif','max:2048','unique:libros,imglibro'],
+            'titulolibro' => ['file','mimes:pdf','unique:libros,titulolibro'],
+            'idiomalibro' => ['nullable','max:24'],
+            'descripcionlibro' => ['nullable','max:120'],
+        ]);*/
 
         try {
             DB::beginTransaction();
@@ -155,7 +187,15 @@ class LibroController extends Controller
             $lib->iduser=$request->get('iduser');
             $lib->idcategoria=$request->get('idcategoria');
             $lib->idautor=$request->get('idautor');
+
             if($request->hasFile('titulolibro')){
+
+                $pdfexite=$request->file('titulolibro')->getClientOriginalName();
+                if (Libro::where('titulolibro', $pdfexite)->exists()) {
+                    $mensaje = "El libro ya existe verifique el nombre del PDF.";
+                    return redirect()->route('libros.index')
+                        ->with('success', $mensaje);
+                }
 
                 $destination = public_path().'/datalibros/'.$lib->titulolibro;
                 if(File::exists($destination)){
@@ -167,6 +207,13 @@ class LibroController extends Controller
                 $lib->titulolibro=$archivo->getClientOriginalName();
             }
             if($request->hasFile('imglibro')){
+
+                $imgexite=$request->file('imglibro')->getClientOriginalName();
+                if (Libro::where('imglibro', $imgexite)->exists()) {
+                    $mensaje = "El libro ya existe verifique el nombre de la Portada.";
+                    return redirect()->route('libros.index')
+                        ->with('success', $mensaje);
+                }
 
                 $destination = public_path().'/datalibros/'.$lib->imglibro;
                 if(File::exists($destination)){
@@ -180,27 +227,30 @@ class LibroController extends Controller
 
             $lib->idiomalibro=$request->get('idiomalibro');
             $lib->descripcionlibro=$request->get('descripcionlibro');
-
+            //return $lib;
             $lib->update();
             DB::commit();
+            $mensaje = "Libro editado con éxito...";
         } catch (Exception $e) {
             DB::rollback();
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                $mensaje = "El libro ya existe verifique el nombre de la Portada y el PDF";
+            }
         }
 
-        //$libro->update($request->all());
-
         return redirect()->route('libros.index')
-            ->with('success', 'Libro editado con éxito...');
+            ->with('success', $mensaje);
     }
 
     /**
-     * @param int $idlibro
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($idlibro)
+    public function destroy($id)
     {
-        $lib = Libro::find($idlibro);
+        $lib = Libro::find($id);
 
         $destinationuno = public_path().'/datalibros/'.$lib->titulolibro;
         $destinationdos = public_path().'/datalibros/'.$lib->imglibro;
@@ -213,7 +263,7 @@ class LibroController extends Controller
             File::delete($destinationdos);
         }
 
-        $libro = Libro::find($idlibro)->delete();
+        $libro = Libro::find($id)->delete();
 
         return redirect()->route('libros.index')
             ->with('success', 'Libro eliminado con éxito...');

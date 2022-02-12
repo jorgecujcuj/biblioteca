@@ -27,7 +27,7 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right bg-primary">
-                                            <a href="{{ route('autores.create') }}" class="dropdown-item text-white bg-primary">{{ __('Crear autor') }}</a>
+                                            <a href="{{ route('autores.create') }}" class="dropdown-item text-white bg-primary">{{ __('Crear Autor') }}</a>
                                         </div>
                                     </div>
                             </div>

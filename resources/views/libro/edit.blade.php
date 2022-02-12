@@ -17,12 +17,12 @@
                             {{ __('Editar Libro:') }}
                             </span>
                         </div>
-                </div>  
+                </div>
 
                 @includeif('partials.errors')
-                   
+
                     <div class="card-body">
-                        <form method="POST" action="{{ route('libros.update', $libro->idlibro) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('libros.update', $libro->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
@@ -31,7 +31,7 @@
                                 <div class="box-body">
 
                                     <div class="form-group">
-                                        <input type="hidden" name="iduser" class="form-control" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="iduser" class="form-control" value="{{ old('iduser',$libro->iduser) }}">
                                     </div>
 
                                     <div class="form-group row">
@@ -41,7 +41,7 @@
                                             <select id="idcategoria" class="form-control @error('idcategoria') is-invalid @enderror" name="idcategoria" autofocus>
                                                 <option value="" selected disabled> - Selecciona una categoria - </option>
                                                     @foreach ($categoria as $cat)
-                                                    <option value="{{ $cat->idcategoria }}" {{$cat->idcategoria == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
+                                                    <option value="{{ $cat->id }}" {{$cat->id == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
                                                     @endforeach
                                             </select>
                                             @error('idcategoria')
@@ -59,7 +59,7 @@
                                             <select id="idautor" class="form-control @error('idautor') is-invalid @enderror" name="idautor" autofocus>
                                                 <option value="" selected disabled> - Selecciona un autor - </option>
                                                 @foreach ($autor as $aut)
-                                                <option value="{{ $aut->idautor }}" {{$aut->idautor == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
+                                                <option value="{{ $aut->id }}" {{$aut->id == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
                                                 @endforeach
                                             </select>
                                             @error('idautor')
@@ -74,7 +74,7 @@
                                         <label for="imglibro" class="col-md-4 col-form-label text-md-right">{{ __("Adjuntar imagen") }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="imglibro" type="file" accept="image/*" class="form-control-file @error('imglibro') is-invalid @enderror" name="imglibro" value="{{ old('imglibro',$libro->imglibro) }}" placeholder="img" autofocus>
+                                            <input id="imglibro" type="file" accept="image/*" class="form-control-file @error('imglibro') is-invalid @enderror" name="imglibro" value="{{ $libro->imglibro }}" placeholder="img" autofocus>
 
                                             @error('imglibro')
                                                 <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                                         <label for="titulolibro" class="col-md-4 col-form-label text-md-right">{{ __("Adjuntar libro") }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="titulolibro" type="file" accept="application/pdf" class="form-control-file @error('titulolibro') is-invalid @enderror" name="titulolibro" value="{{ old('titulolibro',$libro->titulolibro) }}" placeholder="Libro" autofocus>
+                                            <input id="titulolibro" type="file" accept="application/pdf" class="form-control-file @error('titulolibro') is-invalid @enderror" name="titulolibro" value="{{ $libro->titulolibro }}" placeholder="Libro" autofocus>
 
                                             @error('titulolibro')
                                                 <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>                                   
+                                    </div>
 
                                     <div class="form-group row">
                                         <label for="titulolibro" class="col-md-4 col-form-label text-md-right">{{ __("Libro anterior") }}</label>
@@ -125,7 +125,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
 
                                     <div class="form-group row">
                                         <label for="idiomalibro" class="col-md-4 col-form-label text-md-right">{{ __("Idioma") }}</label>
@@ -161,13 +160,13 @@
                                             <a class="btn btn-danger" href="{{ route('libros.index') }}"> Regresar</a>
                                         </div>
                                     </div>
-        
+
                             </div>
                             <!-- Fin -->
-                            
+
                         </form>
                     </div>
-                
+
             </div>
         </div>
     </div>

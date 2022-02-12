@@ -13,8 +13,8 @@
 <div class="text-center">
             <div class="row align-items-center">
                 <h4 style="font-family: Poppins-Bold; font-size: 29px;">
-                    <strong>Libro</strong> 
-                    <br>                                                              
+                    <strong>Libro</strong>
+                    <br>
                     <img type="image/*" class="img-fluid img-thumbnail"
                     src="/datalibros/{{ $libro->imglibro }}"
                     width="185px" alt="...">
@@ -22,20 +22,20 @@
                 </h4>
                 <p>
                     <strong>Idlibro:</strong>
-                    {{ $libro->idlibro }}
-                    <br>                      
-                    <strong>Nombre:</strong> 
+                    {{ $libro->id }}
+                    <br>
+                    <strong>Nombre:</strong>
 					{{ $libro->titulolibro }}
-                    <br> 
-				    <strong>Idcategoria:</strong> 
+                    <br>
+				    <strong>Idcategoria:</strong>
 					{{ $libro->idcategoria }}
-                    <br> 
+                    <br>
                     <strong>Idautor:</strong>
 					{{ $libro->idautor }}
-                    <br> 
+                    <br>
                     <strong>Idiomalibro:</strong>
                     {{ $libro->idiomalibro }}
-                    <br> 
+                    <br>
                     <strong>Descripcionlibro:</strong>
                     {{ $libro->descripcionlibro }}
                 </p>
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-primary mb-3">
- 
+
                     <div class="card-body">
 
                             <div class="container" id="pdf">
@@ -58,7 +58,7 @@
                                     <p>Su navegador no es compatible con iframes</p>
                                 </iframe>
                             </div>
-                    
+
                     </div>
                 </div>
             </div>

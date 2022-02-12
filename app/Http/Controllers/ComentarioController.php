@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentario;
-use Illuminate\Http\Request;
+use App\Http\Requests\Comentario\StoreComentarioRequest;
+use App\Http\Requests\Comentario\UpdateComentarioRequest;
 
 /**
  * Class ComentarioController
@@ -24,8 +25,7 @@ class ComentarioController extends Controller
     {
         $comentarios = Comentario::paginate(10);
 
-        return view('comentario.index', compact('comentarios'))
-            ->with('i', (request()->input('page', 1) - 1) * $comentarios->perPage());
+        return view('comentario.index', compact('comentarios'));
     }
 
     /**
@@ -45,11 +45,10 @@ class ComentarioController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComentarioRequest $request)
     {
-        request()->validate(Comentario::$rules);
 
-        $comentario = Comentario::create($request->all());
+        Comentario::create($request->all());
 
         return redirect()->route('comentarios.index')
             ->with('success', 'Comentario enviado con éxito...');
@@ -88,11 +87,12 @@ class ComentarioController extends Controller
      * @param  Comentario $comentario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comentario $comentario)
+    public function update(UpdateComentarioRequest $request, Comentario $comentario)
     {
-        request()->validate(Comentario::$rules);
 
-        $comentario->update($request->all());
+        $data = $request->only('comentario','nombreautor','email');
+
+        $comentario->update($data);
 
         return redirect()->route('comentarios.index')
             ->with('success', 'Comentario editado con éxito...');

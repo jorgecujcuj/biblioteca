@@ -17,7 +17,7 @@
                             {{ __('Crear Libro:') }}
                             </span>
                         </div>
-                </div>  
+                </div>
 
                 @includeif('partials.errors')
 
@@ -37,7 +37,7 @@
                                             <select id="idcategoria" class="form-control @error('idcategoria') is-invalid @enderror" name="idcategoria" autofocus>
                                                 <option value="" selected disabled> - Selecciona una categoria - </option>
                                                     @foreach ($categoria as $cat)
-                                                    <option value="{{ $cat->idcategoria }}" {{$cat->idcategoria == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
+                                                    <option value="{{ $cat->id }}" {{$cat->id == $libro->idcategoria ? 'selected' : ''}}>{{ $cat->nombrecategoria }}</option>
                                                     @endforeach
                                             </select>
                                             @error('idcategoria')
@@ -55,7 +55,7 @@
                                             <select id="idautor" class="form-control @error('idautor') is-invalid @enderror" name="idautor" autofocus>
                                                 <option value="" selected disabled> - Selecciona un autor - </option>
                                                 @foreach ($autor as $aut)
-                                                <option value="{{ $aut->idautor }}" {{$aut->idautor == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
+                                                <option value="{{ $aut->id }}" {{$aut->id == $libro->idautor ? 'selected' : ''}}>{{ $aut->nombreautor }}</option>
                                                 @endforeach
                                             </select>
                                             @error('idautor')
@@ -79,6 +79,8 @@
                                             @enderror
                                         </div>
                                     </div>
+
+
 
                                     <div class="form-group row">
                                         <label for="titulolibro" class="col-md-4 col-form-label text-md-right">{{ __("Adjuntar libro") }}</label>
@@ -128,7 +130,7 @@
                                             <a class="btn btn-danger" href="{{ route('libros.index') }}"> Regresar</a>
                                         </div>
                                     </div>
-                                
+
                             <!-- Fin -->
                         </form>
                     </div>
